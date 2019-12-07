@@ -1,0 +1,72 @@
+{% extends 'klasowe/base.html' %}
+{% load static %}
+{% block content %}
+    <select style="width: 18%; padding: 0;" class="form-control float-right mb-2" id="year" onchange="change_year()">
+        <option value="{{ year_choosed }}">{{ year_choosed }}</option>
+        {% for year in years %}
+            {% if year_choosed|add:0 != year.year %}
+                <option value="{{ year.year }}">{{ year.year }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <th scope="col">Płatnik</th>
+                <th scope="col">Wrzesień</th>
+                <th scope="col">Październik</th>
+                <th scope="col">Listopad</th>
+                <th scope="col">Grudzień</th>
+                <th scope="col">Styczeń</th>
+                <th scope="col">Luty</th>
+                <th scope="col">Marzec</th>
+                <th scope="col">Kwiecień</th>
+                <th scope="col">Maj</th>
+                <th scope="col">Czerwiec</th>
+            </thead>
+            <tbody>
+                <th scope="row">{{ request.user.get_full_name }}</th>
+                {% for i in '0123456789'|make_list %}
+                    <td>
+                        <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="defaultUnchecked" disabled {% for user_payment in user_payments %} {% if user_payment.month == i|add:0 %} checked {% endif %} {% endfor %}><label class="custom-control-label" for="defaultUnchecked"></label></div>
+                    </td>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if request.session.role == 'admin' %}
+        <div class="text-center"><h1>Panel administratora</h1></div>
+        <form method="post">{% csrf_token %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <th scope="col">Płatnik</th>
+                        <th scope="col">Wrzesień</th>
+                        <th scope="col">Październik</th>
+                        <th scope="col">Listopad</th>
+                        <th scope="col">Grudzień</th>
+                        <th scope="col">Styczeń</th>
+                        <th scope="col">Luty</th>
+                        <th scope="col">Marzec</th>
+                        <th scope="col">Kwiecień</th>
+                        <th scope="col">Maj</th>
+                        <th scope="col">Czerwiec</th>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                            <tr>
+                                <td>{{ student.user.get_full_name }}</td>
+                                {% for i in '0123456789'|make_list %}
+                                    <td><input type="checkbox" name="{{student.id}}_{{i}}"{% for payment in students_payments %}{% if payment.student_fk.id == student.id and payment.month == i|add:0 %} checked {% endif %}{% endfor %}></td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center"><input type="submit" class="btn btn-success"></div>
+        </form>
+    {% endif %}
+    <script src="{% static 'klasowe/year_choose.js' %}"></script>
+{% endblock content %}

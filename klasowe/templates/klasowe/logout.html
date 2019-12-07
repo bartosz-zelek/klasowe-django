@@ -1,0 +1,12 @@
+{% extends 'klasowe/base.html' %}
+
+{% block content %}
+    <div class="m-3">
+        <h2>Zostałeś wylogowany</h2>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                <a href="{% url 'login' %}">Zaloguj się ponownie</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}

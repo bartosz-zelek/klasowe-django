@@ -1,0 +1,11 @@
+{% extends 'klasowe/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="w-50" style="margin: 0 auto;">
+        <form method="post">{% csrf_token %}
+            {{ form|crispy }}
+            <div class="text-center"><input type="submit" class="btn btn-success"></div>
+        </form>
+    </div>
+{% endblock content %}

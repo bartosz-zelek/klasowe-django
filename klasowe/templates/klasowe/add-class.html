@@ -1,0 +1,18 @@
+{% extends 'klasowe/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+    <div class="text-center m-5"><h1 id="title">Dodaj administratora klasy</h1></div>
+    <div class="text-center"><span id="info" class="error">Podaj dane ADMINISTRATORA klasy</span></div>
+    <form id="addClass" class="border border-danger rounded w-25 p-3" novalidate>{% csrf_token %}
+        <span class="error" id="error" style="font-size: 13px;"></span>
+        {{ form_user|crispy }}
+        <span id="classValues">{{ form_code|crispy }}</span>
+        <div class="text-center"><input type="submit" value="Dodaj" class="button btn btn-primary"></div>
+    </form>
+        <ol id="usersList" class="text-center"></ol>
+        <div class="text-center"><input type="button" value="Utwórz klasę" style="display:none;" class="btn btn-secondary mt-5" id="makeClass"></div>
+    <script src="{% static 'klasowe/scriptAddClass.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+{% endblock content %}

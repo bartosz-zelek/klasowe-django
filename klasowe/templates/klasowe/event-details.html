@@ -1,0 +1,45 @@
+{% extends 'klasowe/base.html' %}
+{% block content %}
+    <div class="text-center w-50" style="margin: 0 auto">
+        <b class="text-muted">{{ name }}</b><br>
+        <span class="text-muted">{{ date }}</span><br>
+        <span class="text-muted">Koszt: {{ value }} zł</span><br>
+      <a href="/event-delete/{{ request.session.event_id }}"><b class="text-danger mt-4">Usuń wydarzenie</b></a>
+    </div>
+        {% if request.session.role == 'admin' %}
+            <form method="post">{% csrf_token %}
+                
+                <table class="table table-bordered table-striped w-50" style="margin: 0 auto;">
+                    <thead>
+                        <th scope="col">Płatnik</th>
+                        <th scope="col">Uregulowano</th>
+                    </thead>
+                    <tbody>
+                        {% for payment in event_payments %}
+                            <tr>
+                                <td>{{ payment.student_fk.user.get_full_name }}</td>
+                                <td><input type="checkbox" name="{{ payment.student_fk.user.id }}" {% if payment.paid %}checked{% endif %}></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="text-center"><input type="submit" class="btn btn-success mt-3"></div>
+            </form>
+            {% else %}
+            <table class="table table-bordered table-striped w-50" style="margin: 0 auto;">
+                <thead>
+                    <th scope="col">Płatnik</th>
+                    <th scope="col">Uregulowano</th>
+                </thead>
+                <tbody>
+                    {% for payment in event_payments %}
+                        <tr>
+                            <td>{{ payment.student_fk.user.get_full_name }}</td>
+                            <td><div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="defaultUnchecked" disabled {% if payment.paid %}checked{% endif %}><label class="custom-control-label" for="defaultUnchecked"></label></div></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+{% endblock content %}

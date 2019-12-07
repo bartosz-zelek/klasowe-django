@@ -1,0 +1,54 @@
+			body {
+				/* Background pattern from Toptal Subtle Patterns */
+				font-family: 'Changa', sans-serif;
+				background-image: url(cubes.png);
+			}
+
+			.center-and-border {
+				border: 2px dashed gray;
+				margin: 0 auto;
+				min-width: 300px;
+			}
+            h1 {
+				font-size: 40px;
+				color: #2b722b;
+				margin-top: 5%;
+				font-weight: bold;
+			}
+            footer {
+				background-color: #707070;
+				color: white;
+			}
+            #addClass{
+                min-width: 300px;
+				border-style: dashed !important;
+				padding: 1%;
+				font-size: 110%;
+				margin: 0 auto;
+			}
+			.error{
+			    color: red;
+			}
+            .user{
+				padding-top: 10px;
+				padding-bottom: 10px;
+				background-color: rgba(196, 196, 196, 0.3);
+				margin: 0 auto;
+				border-bottom: 1px dotted rgb(90, 80, 148);
+				line-height: 200%;
+				width: 25%;
+                min-width: 300px;
+
+			}
+			ol{
+			    padding: 0;
+			}
+			a:hover{
+			    cursor: pointer;
+			}
+			.alert{
+			    margin: 0 auto;
+			}
+			table{
+			    text-align: center;
+			}

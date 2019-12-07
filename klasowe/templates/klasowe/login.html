@@ -1,0 +1,17 @@
+{% extends 'klasowe/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="text-center"><h1>Zaloguj się do naszego serwisu!</h1></div>
+    <form method="post">{% csrf_token %}
+        <div class="form-group center-and-border p-3 mt-5 w-25">
+            {{ form|crispy }}
+            <small class="text-muted float-right">
+                <a href="{% url 'password_reset' %}">Zapomniałem hasła</a>
+            </small><br>
+            <div class="text-center"><input type="submit" class="btn btn-success"></div>
+            <hr>
+            <div class="text-center"><a href="{% url 'add-class' %}">Stwórz swoją klasę</a></div>
+        </div>
+    </form>
+<!--<div class='text-muted text-center'>Trwają prace. Witryna nie jest w pełni funkcjonalna.</div>-->
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'klasowe/base.html' %}
+{% block content %}
+    <div class="text-center mt-4" style="margin: 0 auto; width: 30%">
+        {% if events %}
+            <form method="post">{% csrf_token %}
+                <select class="form-control" name="event_id" style="padding: 0;">
+                    {% for event in events %}
+                        <option value="{{ event.id }}">{{ event.name }}</option>
+                    {% endfor %}
+                </select>
+                <div class="text-center"><input type="submit" class="btn btn-success mt-3"></div>
+            </form>
+        {% else %}
+            <b>Brak wydarzeń</b>
+        {% endif %}
+    </div>
+{% endblock content %}

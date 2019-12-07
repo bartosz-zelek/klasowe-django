@@ -1,0 +1,24 @@
+{% extends 'klasowe/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="w-25" style="margin: 0 auto;">
+        <form method="post">{% csrf_token %}
+            {{ form|crispy }}
+            <div class="text-center"><input type="submit" class="btn btn-success"></div>
+        </form>
+    </div>
+    <hr>
+        <table class="table table-bordered table-striped w-25" style="margin: 0 auto;">
+            <thead>
+                <th scope="col">Rok</th>
+            </thead>
+            <tbody>
+                {% for year in years %}
+                    <tr>
+                        <td><span style="margin-right:-11%;">{{ year.year }}</span> <a href="/year-delete/{{ year.id }}" class="float-right btn btn-danger btn-sm">X</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends 'klasowe/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form method="post">{% csrf_token %}
+        <div class="w-50" style="margin: 0 auto;">
+            {{ form|crispy }}
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <th scope="col">Płatnik</th>
+                    <th scope="col">Bierze udział</th>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                        <tr>
+                            <td>{{ student.user.get_full_name }}</td>
+                            <td><input type="checkbox" name="{{student.id}}"></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-center"><input type="submit" class="btn btn-success"></div>
+        </div>
+    </form>
+{% endblock content %}
